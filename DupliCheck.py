@@ -27,6 +27,12 @@ def find_duplicates(folder_path):
             duplicates.append(file_paths)
 
     return duplicates
+def delete_files(file_paths):
+    archivo_a_mantener = file_paths[0]  # Mantén el primer archivo de la lista
+    for file_path in file_paths:
+        if file_path != archivo_a_mantener:
+            os.remove(file_path)
+            print(f"Eliminado: {file_path}")
 
 if __name__ == "__main__":
     folder_to_scan = "./imagen_fusionada"
@@ -36,7 +42,9 @@ if __name__ == "__main__":
         print("No se encontraron imágenes duplicadas.")
     else:
         print("Imágenes duplicadas encontradas:")
-        print(duplicate_groups)
+        # print(duplicate_groups)
         for group in duplicate_groups:
-            print("\n".join(group))
-            print("-" * 30)
+            delete_files(group)
+            # print("\n".join(group))
+            # print("-" * 30)
+        
