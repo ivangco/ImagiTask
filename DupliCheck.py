@@ -2,7 +2,7 @@ import os
 import hashlib
 from collections import defaultdict
 
-def calculate_hash(file_path, block_size=65536):
+def calculate_hash(file_path: str, block_size: int = 65536) -> str:
     sha1 = hashlib.sha1()
     with open(file_path, 'rb') as f:
         while True:
@@ -12,7 +12,7 @@ def calculate_hash(file_path, block_size=65536):
             sha1.update(data)
     return sha1.hexdigest()
 
-def find_duplicates(folder_path):
+def find_duplicates(folder_path: str) -> List[List[str]]:
     hash_map = defaultdict(list)
     duplicates = []
 
@@ -27,7 +27,8 @@ def find_duplicates(folder_path):
             duplicates.append(file_paths)
 
     return duplicates
-def delete_files(file_paths):
+
+def delete_files(file_paths: List[str]) -> None:
     archivo_a_mantener = file_paths[0]  # Mantén el primer archivo de la lista
     for file_path in file_paths:
         if file_path != archivo_a_mantener:
@@ -41,7 +42,7 @@ if __name__ == "__main__":
     if not duplicate_groups:
         print("No se encontraron imágenes duplicadas.")
     else:
-        print("Imágenes duplicadas encontradas:")
+        print("Imágenes duplicadas encontradas.")
         # print(duplicate_groups)
         for group in duplicate_groups:
             delete_files(group)
